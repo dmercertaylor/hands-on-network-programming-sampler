@@ -10,7 +10,7 @@ int main(int argc, char ** argv){
         return 1;
     }
 #endif
-
+    // POSIX sockets need no setup lol
     printf("Socket API ready for use.\n");
 
 #ifdef _WIN32
