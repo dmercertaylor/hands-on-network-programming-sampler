@@ -1,4 +1,5 @@
 #include "sock_init.h"
+#include <stdio.h>
 
 extern int errno;
 

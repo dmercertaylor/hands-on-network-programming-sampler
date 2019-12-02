@@ -18,5 +18,3 @@
 #include <errno.h>
 
 #endif
-
-#include <stdio.h>
