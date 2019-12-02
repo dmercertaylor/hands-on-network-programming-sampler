@@ -1,11 +1,4 @@
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <unistd.h>
-#include <errno.h>
-
+#include "sock_init.h"
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -32,7 +25,7 @@ int main(int argc, char ** argv){
     /* Specify we want an IPv4 address
        We could use AF_INET6 for IPv6 instead.
     */
-    hints.ai_family = AF_INET;
+    hints.ai_family = AF_INET6;
     /* Specify we want a stream socket (good for TCP) */
     hints.ai_socktype = SOCK_STREAM;
     /* Specify we want to listen on any available network interface */
@@ -80,6 +73,12 @@ int main(int argc, char ** argv){
         perror("Socket() failed, failed to get socket_listen");
     }
 
+    /* Set socket to listen on both IPv4 and IPv6 (must be IPv6 address to do this) */
+    int option = 0;
+    if(setsockopt(socket_listen, IPPROTO_IPV6, IPV6_V6ONLY, (void*)&option, sizeof(option))){
+        perror("setsockopt() failed.");
+        return 1;
+    }
 /* *** BIND SOCKET TO LOCAL ADDRESS *** */
     printf("Binding socket to local address...\n");
     
@@ -183,6 +182,7 @@ int main(int argc, char ** argv){
 /* *** CLOSE STUFF DOWN *** */
     printf("Closing connection...\n");
     close(socket_client);
+    printf("Closing server...\n");
     close(socket_listen);
 
     printf("Finished.\n");
