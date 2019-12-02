@@ -79,6 +79,13 @@ int main(int argc, char ** argv){
         perror("setsockopt() failed.");
         return 1;
     }
+    /*
+        int setsockopt(int sockfd, int level, int optname,
+                        const void *optval, socklen_t optlen);
+        Sets the value of the option specified by optname
+        to the value provided in optval, with the file descriptor
+        specified in the sockfd argument. Returns 0 on success.
+    */
 /* *** BIND SOCKET TO LOCAL ADDRESS *** */
     printf("Binding socket to local address...\n");
     

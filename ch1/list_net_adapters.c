@@ -61,6 +61,6 @@ int main(int argc, char ** argv){
     }
 
     // DEALLOCATION
-    freeifaddrs(address);
+    freeifaddrs(addresses);
     return 0;
 }
