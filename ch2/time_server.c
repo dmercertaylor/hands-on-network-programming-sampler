@@ -4,7 +4,6 @@
 #include <time.h>
 
 int main(int argc, char ** argv){
-
 /* **** FIGURE OUT LOCAL ADDRESS **** */
     printf("Configuring local address...\n");
 
@@ -105,7 +104,7 @@ int main(int argc, char ** argv){
 
 /* *** START LISTENING *** */
     printf("Listening...\n");
-    if(listen(socket_listen, 10) < 0){
+    if( listen(socket_listen, 10 ) < 0){
         perror("listen() failed");
         return 1;
     }
@@ -135,7 +134,7 @@ int main(int argc, char ** argv){
 
     socklen_t client_len = sizeof(client_address);
     /* create a new socket to hold incoming clients */
-    int socket_client = accept(socket_listen, (struct sockaddr*) &client_address, &client_len);
+    int socket_client = accept( socket_listen, (struct sockaddr*) &client_address, &client_len );
     /*
         int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
         accept() takes the new connections off the queue from listen(), and
@@ -163,11 +162,8 @@ int main(int argc, char ** argv){
     char request[1024];
     int bytes_recieved = recv(socket_client, request, sizeof(request), 0);
     printf("Recieved %d bytes.\n", bytes_recieved);
-    /* 
-        To print the get request:
-        printf("%.*s\n", bytes_recieved, request);
-    */
-
+    /* To print the get request: */
+    printf("%.*s\n", bytes_recieved, request);
 /* *** SEND BACK A RESPONSE *** */
     printf("Sending response...\n");
     /* hard coded response lol */
